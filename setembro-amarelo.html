@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setembro Amarelo · Prevenção ao Suicídio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: #fffdf5; color: #1a1a1a; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem; background: #fffdf5;
+      border-bottom: 1px solid #f0e68c;
+    }
+    .logo { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: #1a1a1a; }
+    .logo span { color: #f5a623; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; font-size: .9rem; font-weight: 600; color: #3d3d3d; }
+    .nav-links a:hover { color: #f5a623; }
+    .hamburger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+    .mobile-menu { display: none; flex-direction: column; gap: 1rem; padding: 1rem 1.5rem; background: #fff9e0; border-bottom: 1px solid #f0e68c; font-weight: 600; font-size: .9rem; }
+    .mobile-menu a { color: #3d3d3d; }
+    .mobile-menu a:hover { color: #f5a623; }
+
+    /* HERO */
+    .hero {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 1.5rem 8rem;
+      background: linear-gradient(160deg, #fff9d6 0%, #fffdf5 60%);
+    }
+    .hero-glow-1 { position: absolute; top: 2rem; left: 2rem; width: 12rem; height: 12rem; border-radius: 50%; background: #f5a623; opacity: .15; filter: blur(60px); pointer-events: none; }
+    .hero-glow-2 { position: absolute; bottom: 1rem; right: 2.5rem; width: 16rem; height: 16rem; border-radius: 50%; background: #f5a623; opacity: .08; filter: blur(80px); pointer-events: none; }
+    .badge { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .3rem 1rem; border-radius: 9999px; background: #fff3b0; color: #a06d00; border: 1px solid #f5d060; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Fraunces', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 700; line-height: 1.1; max-width: 900px; margin-bottom: 1.5rem; }
+    .hero h1 em { color: #f5a623; font-style: italic; }
+    .hero p { font-size: 1.1rem; max-width: 600px; line-height: 1.7; color: #4a4a4a; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { padding: .9rem 2rem; border-radius: 1rem; font-weight: 700; color: #fff; background: #f5a623; font-size: 1rem; transition: transform .2s; box-shadow: 0 8px 24px #f5a62340; border: none; cursor: pointer; }
+    .btn-primary:hover { transform: scale(1.05); }
+    .btn-outline { padding: .9rem 2rem; border-radius: 1rem; font-weight: 700; font-size: 1rem; border: 2px solid #f5a623; color: #a06d00; background: transparent; cursor: pointer; transition: background .2s; }
+    .btn-outline:hover { background: #fff9d6; }
+
+    /* STATS */
+    .stats { padding: 4rem 2rem; background: #1a1a1a; }
+    .stats-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 700; color: #f5a623; }
+    .stat-label { font-size: .85rem; color: #c8c8c8; margin-top: .3rem; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .section-tag { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #f5a623; }
+    .section-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-top: .5rem; color: #1a1a1a; }
+    .section-sub { font-size: .95rem; color: #5a5a5a; margin-top: 1rem; max-width: 480px; }
+
+    /* CARDS SINAIS */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .card { background: #fff9d6; border: 1px solid #f5e080; border-radius: 1rem; padding: 1.5rem; transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px #f5a62318; }
+    .card-icon { font-size: 2rem; margin-bottom: .75rem; display: block; }
+    .card h3 { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
+    .card p { font-size: .875rem; line-height: 1.6; color: #5a5a5a; }
+
+    /* COMO AJUDAR */
+    #como-ajudar { background: #fff3b0; }
+    .como-tag { color: #a06d00 !important; }
+    .dicas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .dica { display: flex; gap: 1.25rem; background: #fff; border: 1px solid #f5d060; border-radius: 1rem; padding: 1.5rem; transition: box-shadow .2s; }
+    .dica:hover { box-shadow: 0 6px 20px #f5a62318; }
+    .dica-num { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 700; color: #f5a623; opacity: .5; line-height: 1; flex-shrink: 0; }
+    .dica h3 { font-weight: 700; font-size: 1rem; margin-bottom: .35rem; }
+    .dica p { font-size: .875rem; line-height: 1.6; color: #5a5a5a; }
+
+    /* CVV */
+    #cvv { background: #1a1a1a; text-align: center; }
+    #cvv h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #f5a623; margin-bottom: 1rem; }
+    #cvv p { color: #c8c8c8; font-size: .95rem; line-height: 1.7; max-width: 560px; margin: 0 auto 2rem; }
+    .cvv-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-cvv-outline { padding: .9rem 2rem; border-radius: 1rem; font-weight: 700; font-size: 1rem; border: 2px solid #f5a623; color: #f5a623; background: transparent; cursor: pointer; transition: background .2s; }
+    .btn-cvv-outline:hover { background: rgba(255,255,255,.08); }
+
+    /* FOOTER */
+    footer { background: #111; border-top: 1px solid #2a2a2a; padding: 2rem 1.5rem; text-align: center; font-size: .75rem; color: #888; }
+    footer a { text-decoration: underline; }
+    footer a:hover { color: #f5a623; }
+
+    /* CHATBOT */
+    #chatbot-btn {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 4rem; height: 4rem; border-radius: 50%; background: #f5a623;
+      border: none; cursor: pointer; font-size: 1.5rem;
+      box-shadow: 0 8px 32px #f5a62360;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .2s;
+    }
+    #chatbot-btn:hover { transform: scale(1.1); }
+    #chatbot-window {
+      position: fixed; bottom: 6rem; right: 1.5rem; z-index: 999;
+      width: 340px; max-width: calc(100vw - 2rem);
+      max-height: 70vh; border-radius: 1.5rem;
+      background: #fffdf5; border: 1.5px solid #f5d060;
+      box-shadow: 0 16px 48px #00000025;
+      display: flex; flex-direction: column; overflow: hidden;
+      transition: opacity .3s, transform .3s;
+    }
+    #chatbot-window.hidden { opacity: 0; transform: translateY(2rem); pointer-events: none; }
+    .chat-header { background: #f5a623; display: flex; align-items: center; gap: .75rem; padding: 1rem 1.25rem; }
+    .chat-avatar { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: #fff3b0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; }
+    .chat-header-info p:first-child { font-weight: 700; color: #fff; font-size: .875rem; }
+    .chat-header-info p:last-child { font-size: .7rem; color: rgba(255,255,255,.8); margin-top: .1rem; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .75rem; scrollbar-width: none; }
+    .chat-messages::-webkit-scrollbar { display: none; }
+    .msg { display: flex; }
+    .msg.bot { justify-content: flex-start; }
+    .msg.user { justify-content: flex-end; }
+    .bubble { max-width: 85%; padding: .75rem 1rem; border-radius: 1rem; font-size: .875rem; line-height: 1.6; }
+    .bubble p + p { margin-top: .5rem; }
+    .msg.bot .bubble { background: #fff9d6; color: #2a2a2a; border-bottom-left-radius: .2rem; }
+    .msg.user .bubble { background: #f5a623; color: #fff; border-bottom-right-radius: .2rem; }
+    .typing { display: flex; gap: .3rem; align-items: center; padding: .75rem 1rem; background: #fff9d6; border-radius: 1rem; border-bottom-left-radius: .2rem; width: fit-content; }
+    .dot { width: .5rem; height: .5rem; border-radius: 50%; background: #f5a623; animation: bounce 1s infinite; }
+    .dot:nth-child(2) { animation-delay: .2s; }
+    .dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    .chat-options { display: flex; flex-direction: column; gap: .5rem; }
+    .chat-option { background: #fff; border: 1.5px solid #f5d060; border-radius: .75rem; padding: .6rem 1rem; font-size: .8rem; font-weight: 600; color: #a06d00; text-align: left; cursor: pointer; transition: transform .15s, background .15s; }
+    .chat-option:hover { transform: scale(1.02); background: #fff9d6; }
+    .chat-restart { font-size: .75rem; color: #a06d00; text-decoration: underline; background: none; border: none; cursor: pointer; align-self: center; margin-top: .25rem; }
+    .chat-footer { background: #fff9d6; border-top: 1px solid #f5e080; padding: .5rem 1rem; text-align: center; font-size: .7rem; color: #a06d00; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .stats-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .stat-num { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Setembro<span>Amarelo</span></div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#sinais">Sinais</a></li>
+    <li><a href="#como-ajudar">Como ajudar</a></li>
+    <li><a href="#cvv">CVV</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+  <a href="#sinais" onclick="toggleMenu()">Sinais</a>
+  <a href="#como-ajudar" onclick="toggleMenu()">Como ajudar</a>
+  <a href="#cvv" onclick="toggleMenu()">CVV</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="sobre">
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <span class="badge">Setembro Amarelo · Prevenção ao Suicídio</span>
+  <h1>A vida merece<br><em>ser vivida.</em></h1>
+  <p>Setembro Amarelo é a campanha nacional de prevenção ao suicídio. Falar sobre esse tema salva vidas. Você não está sozinho — e nunca estará.</p>
+  <div class="hero-btns">
+    <a href="#cvv" class="btn-primary">Ligue agora: CVV 188</a>
+    <a href="#sinais" class="btn-outline">Reconheça os sinais</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div><div class="stat-num">13.700+</div><div class="stat-label">mortes por suicídio por ano no Brasil</div></div>
+    <div><div class="stat-num">90%</div><div class="stat-label">dos casos tinham transtorno mental tratável</div></div>
+    <div><div class="stat-num">1</div><div class="stat-label">conversa pode salvar uma vida</div></div>
+  </div>
+</div>
+
+<!-- SINAIS -->
+<section id="sinais">
+  <div class="section-inner">
+    <div>
+      <span class="section-tag">Fique atento</span>
+      <h2 class="section-title">Sinais de alerta</h2>
+      <p class="section-sub">Reconhecer os sinais é o primeiro passo para ajudar quem está sofrendo.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card"><span class="card-icon">😔</span><h3>Isolamento</h3><p>Afastamento de amigos, família e atividades que antes eram prazerosas.</p></div>
+      <div class="card"><span class="card-icon">💬</span><h3>Falas sobre morte</h3><p>Comentários como "seria melhor se eu não existisse" ou "quero sumir".</p></div>
+      <div class="card"><span class="card-icon">😴</span><h3>Mudanças bruscas</h3><p>Alterações repentinas no sono, apetite, humor ou comportamento.</p></div>
+      <div class="card"><span class="card-icon">🎁</span><h3>Doação de pertences</h3><p>Dar objetos queridos sem motivo aparente, como uma despedida.</p></div>
+      <div class="card"><span class="card-icon">😰</span><h3>Desesperança</h3><p>Sentimento de que nada vai melhorar e de que não há saída.</p></div>
+      <div class="card"><span class="card-icon">⚡</span><h3>Agitação extrema</h3><p>Ansiedade intensa, impulsividade ou risco excessivo sem motivo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO AJUDAR -->
+<section id="como-ajudar">
+  <div class="section-inner">
+    <div>
+      <span class="section-tag como-tag">Você pode fazer a diferença</span>
+      <h2 class="section-title">Como ajudar alguém</h2>
+    </div>
+    <div class="dicas-grid">
+      <div class="dica"><span class="dica-num">01</span><div><h3>Ouça sem julgamento</h3><p>Dê espaço para a pessoa falar. Sua presença já é um gesto poderoso.</p></div></div>
+      <div class="dica"><span class="dica-num">02</span><div><h3>Pergunte diretamente</h3><p>Perguntar sobre suicídio não aumenta o risco — pode salvar uma vida.</p></div></div>
+      <div class="dica"><span class="dica-num">03</span><div><h3>Não minimize a dor</h3><p>Evite frases como "força de vontade" ou "tem gente pior". Valide o sofrimento.</p></div></div>
+      <div class="dica"><span class="dica-num">04</span><div><h3>Encaminhe para ajuda</h3><p>Incentive a busca por apoio profissional e ofereça ajuda para agendar.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CVV -->
+<section id="cvv">
+  <div class="section-inner">
+    <span style="font-size:2.5rem;display:block;margin-bottom:1rem;">💛</span>
+    <h2>CVV — Centro de Valorização da Vida</h2>
+    <p>O CVV oferece apoio emocional gratuito e sigiloso 24 horas por dia, 7 dias por semana. Se você ou alguém que você conhece precisa de ajuda, entre em contato agora.</p>
+    <div class="cvv-btns">
+      <a href="tel:188" class="btn-primary" style="font-size:1.1rem;">📞 Ligue 188</a>
+      <a href="https://www.cvv.org.br" target="_blank" rel="noopener noreferrer" class="btn-cvv-outline">Chat Online: cvv.org.br</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Setembro Amarelo · Campanha Nacional de Prevenção ao Suicídio · <a href="https://www.cvv.org.br" target="_blank" rel="noopener noreferrer">cvv.org.br</a> · Ligue <strong>188</strong></p>
+</footer>
+
+<!-- CHATBOT -->
+<button id="chatbot-btn" onclick="toggleChat()" aria-label="Abrir chat de apoio">💛</button>
+
+<div id="chatbot-window" class="hidden">
+  <div class="chat-header">
+    <div class="chat-avatar">🌻</div>
+    <div class="chat-header-info">
+      <p>Luz</p>
+      <p>Apoio emocional · Setembro Amarelo</p>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-footer">CVV 24h · <strong>188</strong> · cvv.org.br</div>
+</div>
+
+<script>
+  // NAV
+  function toggleMenu() {
+    const m = document.getElementById('mobileMenu');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  // CHATBOT DATA
+  const nos = {
+    inicio: { texto: ["Olá 💛 Fico feliz que você esteja aqui. Pode me chamar de Luz.", "Este é um espaço seguro, sem julgamentos. Posso ficar um pouco com você?"], opcoes: [{l:"Sim, pode ficar.", p:"como_esta"},{l:"Não sei se quero conversar...", p:"sem_vontade"}] },
+    sem_vontade: { texto: ["Tudo bem. Você não precisa falar nada que não queira.", "Mas saiba que o fato de você ter aberto essa janela já diz muito. Diz que uma parte de você ainda está buscando algo — e isso importa muito para mim.", "Posso fazer uma pergunta simples?"], opcoes: [{l:"Pode.", p:"como_esta"},{l:"Só estou olhando.", p:"so_olhando"}] },
+    so_olhando: { texto: ["Tudo bem. Fico aqui, sem pressa. 🌻", "Se em algum momento quiser conversar, é só me chamar. Estou aqui por você."], opcoes: [{l:"Ok, quero conversar um pouco.", p:"como_esta"}] },
+    como_esta: { texto: ["Como você está se sentindo hoje?"], opcoes: [{l:"Muito mal. Me sinto vazio(a).", p:"vazio"},{l:"Cansado(a) de tudo.", p:"cansado"},{l:"Com pensamentos ruins.", p:"pensamentos_ruins"},{l:"Triste, mas quero melhorar.", p:"quer_melhorar"}] },
+    vazio: { texto: ["Sentir esse vazio é uma das coisas mais difíceis que existem. E eu quero que você saiba: o que você sente é real, e você não precisa enfrentá-lo sozinho(a).", "Me conta — esse sentimento veio de repente ou faz um tempo que ele está com você?"], opcoes: [{l:"Faz um tempo longo.", p:"tempo_longo"},{l:"Algo aconteceu recentemente.", p:"algo_aconteceu"}] },
+    cansado: { texto: ["Esse cansaço que você sente — não é frescura, não é fraqueza. É o sinal de que você carregou peso demais por muito tempo.", "Você já parou para pensar em uma coisa que te dava energia antigamente, mesmo que pequena?"], opcoes: [{l:"Sim, me lembro de algo.", p:"memoria_boa"},{l:"Não consigo lembrar de nada.", p:"sem_memoria"}] },
+    pensamentos_ruins: { texto: ["Obrigado(a) por ter coragem de dizer isso. Falar sobre pensamentos difíceis já é um ato muito corajoso.", "Você está tendo pensamentos de se machucar?"], opcoes: [{l:"Sim, às vezes.", p:"pensamentos_suicidas"},{l:"Não, mas é muita tristeza.", p:"muita_tristeza"}] },
+    pensamentos_suicidas: { texto: ["Obrigado(a) por confiar em mim isso. Isso exige muita coragem.", "Você precisa saber: a sua vida tem valor imensurável, mesmo que agora seja difícil enxergar isso. Esses pensamentos são um sinal de que você precisa de apoio profissional — e isso é absolutamente normal.", "Por favor, ligue agora para o CVV: 188 (gratuito, 24h). Eles estão prontos para ouvir você.", "Você consegue fazer isso agora?"], opcoes: [{l:"Vou tentar ligar.", p:"vai_ligar"},{l:"Preciso de mais coragem.", p:"mais_coragem"}] },
+    vai_ligar: { texto: ["Isso é tudo o que importa agora. 💛", "Ligue 188 — é gratuito, sigiloso e funciona 24 horas. Eles vão ouvir você sem julgamento, assim como eu.", "Você é importante. A sua história não termina aqui."], fim: true },
+    mais_coragem: { texto: ["Eu entendo. É difícil.", "Mas pensa comigo: você já enfrentou dias difíceis antes, e chegou até aqui. Isso mostra uma força que talvez você nem perceba que tem.", "O CVV (188) está lá exatamente para momentos como esse. Você não precisa estar 'pronto(a)' — pode ligar exatamente como está, com medo e tudo.", "Eu acredito em você. 💛"], opcoes: [{l:"Ok, vou tentar.", p:"vai_ligar"},{l:"Quero continuar conversando aqui.", p:"continuar_conversa"}] },
+    muita_tristeza: { texto: ["Tristeza profunda também é muito pesada de carregar. Você não precisa fingir que está bem.", "Quero te perguntar algo com carinho: você consegue identificar alguma pessoa, animal, lugar ou lembrança que ainda traz um pouquinho de calor para o seu coração?"], opcoes: [{l:"Sim, tenho alguém ou algo assim.", p:"tem_alguem"},{l:"Não consigo pensar em nada.", p:"sem_ancora"}] },
+    sem_ancora: { texto: ["Quando estamos muito sobrecarregados, é difícil enxergar qualquer coisa boa.", "Mas o fato de você estar aqui, conversando comigo, significa que existe uma parte de você que ainda busca algo. E essa parte importa.", "O CVV (188) tem pessoas prontas para ouvir você agora. 💛"], opcoes: [{l:"Vou ligar para o CVV.", p:"vai_ligar"},{l:"Quero continuar conversando.", p:"continuar_conversa"}] },
+    tempo_longo: { texto: ["Carregar esse peso por tanto tempo... isso é exaustivo. E você chegou até aqui, mesmo assim. Isso diz muito sobre você.", "Existe algum momento da sua vida — mesmo que antigo — em que você se sentiu bem? Uma memória boa?"], opcoes: [{l:"Sim, me lembro de um momento.", p:"memoria_boa"},{l:"Não consigo lembrar de nenhum.", p:"sem_memoria"}] },
+    algo_aconteceu: { texto: ["Às vezes um evento pode abrir uma ferida muito grande. Você não precisa me contar o que foi, mas saiba que o que você sente é completamente válido.", "Nesse momento difícil, existe alguém na sua vida com quem você se sente minimamente seguro(a)?"], opcoes: [{l:"Sim, tenho alguém.", p:"tem_alguem"},{l:"Não, me sinto muito sozinho(a).", p:"sozinho"}] },
+    memoria_boa: { texto: ["Que bonito que você tem essa memória. Ela é sua — ninguém pode tirar isso de você.", "Essa versão de você que viveu aquele momento ainda existe. Ela está dentro de você, esperando para ser reencontrada.", "O que você acha que essa versão mais jovem ou mais feliz de você diria para você hoje?"], opcoes: [{l:"Talvez que eu não desista.", p:"nao_desista"},{l:"Não sei... ela estaria decepcionada.", p:"decepcionada"}] },
+    sem_memoria: { texto: ["Tudo bem. Quando estamos muito no fundo, é difícil enxergar qualquer coisa boa.", "Mas o fato de você ainda estar aqui, conversando comigo, significa que existe uma parte de você que ainda busca algo.", "Você consegue me dizer uma coisa — qualquer coisa — que fez nos últimos dias?"], opcoes: [{l:"Sim, fiz algo pequeno.", p:"coisa_pequena"},{l:"Não consigo fazer nada.", p:"paralisia"}] },
+    tem_alguem: { texto: ["Que bom que existe essa pessoa ou esse lugar. Eles são uma âncora — e você merece ter âncoras.", "Você já pensou em abrir o coração para essa pessoa? Um simples 'não estou bem' já abre uma porta enorme."], opcoes: [{l:"Tenho medo de ser um fardo.", p:"fardo"},{l:"Talvez eu tente.", p:"vai_tentar"}] },
+    sozinho: { texto: ["Solidão dói de um jeito muito profundo. E eu quero que você saiba que não está sozinho(a) agora — estou aqui com você.", "O CVV (188) também está disponível 24 horas para ouvir você, com acolhimento e sem julgamento.", "Você merece ser ouvido(a). 💛"], opcoes: [{l:"Obrigado(a). Quero continuar.", p:"continuar_conversa"},{l:"Vou ligar para o CVV.", p:"vai_ligar"}] },
+    fardo: { texto: ["Eu ouço muito isso. E quero dizer com toda a certeza: você não é um fardo.", "Se a situação fosse inversa — se essa pessoa viesse até você — você a chamaria de fardo?"], opcoes: [{l:"Não, jamais.", p:"reflexao_fardo"},{l:"Talvez sim, não sei.", p:"reflexao_fardo"}] },
+    reflexao_fardo: { texto: ["Exatamente. Você não faria isso com alguém que ama.", "Tratar a si mesmo(a) com menos compaixão do que trataria os outros é algo muito comum em quem está sofrendo — mas não é justo com você.", "Você merece o mesmo cuidado que daria para alguém que você ama. 💛"], opcoes: [{l:"Nunca pensei assim.", p:"nova_perspectiva"},{l:"É difícil acreditar nisso.", p:"dificil_acreditar"}] },
+    nao_desista: { texto: ["Essa voz dentro de você está certa. 💛", "Ela sobreviveu a tudo que você passou até hoje. E ela ainda está aqui, sussurrando para você não desistir.", "O que você precisaria hoje — mesmo que seja algo mínimo — para dar um passo pequeno?"], opcoes: [{l:"Alguém para conversar.", p:"alguem_conversar"},{l:"Descanso e acolhimento.", p:"acolhimento"}] },
+    decepcionada: { texto: ["Eu entendo esse sentimento. Mas essa versão sua do passado — ela passou por algo difícil para chegar onde chegou, não?", "Ela não estaria decepcionada. Ela estaria orgulhosa de que você sobreviveu. Que você ainda está aqui. Que você ainda luta.", "Você lutou muito. E isso conta. 💛"], opcoes: [{l:"Nunca pensei por esse lado.", p:"nova_perspectiva"}] },
+    coisa_pequena: { texto: ["Isso é enorme. Sério.", "Quando estamos no fundo, fazer qualquer coisa — tomar água, sair da cama, respirar — é uma vitória real.", "Isso significa que existe força em você. Pode estar escondida, mas ela está lá. 💛"], opcoes: [{l:"Não parece muito...", p:"pequeno_importa"},{l:"Obrigado(a) por dizer isso.", p:"continuar_conversa"}] },
+    paralisia: { texto: ["Quando estamos muito sobrecarregados, o corpo e a mente travam. Isso não é preguiça — é o seu sistema nervoso gritando que precisa de ajuda.", "Você não precisa fazer nada agora. Só precisa estar aqui, respirando. Isso já é suficiente.", "Mas eu quero te pedir uma coisa: você conseguiria ligar para o CVV (188)? 💛"], opcoes: [{l:"Vou tentar ligar.", p:"vai_ligar"},{l:"Quero continuar conversando.", p:"continuar_conversa"}] },
+    vai_tentar: { texto: ["Isso é muito corajoso.", "E enquanto você não tem coragem, o CVV (188) está lá — pode chegar exatamente como está. 💛"], opcoes: [{l:"Obrigado(a).", p:"continuar_conversa"}] },
+    alguem_conversar: { texto: ["Eu estou aqui. E o CVV (188) também está — 24 horas, gratuitamente.", "Você já deu um grande passo ao conversar comigo. 💛"], opcoes: [{l:"Continuar conversando.", p:"reflexao_final"}] },
+    acolhimento: { texto: ["Você merece descansar. Merece cuidado. Merece acolhimento.", "O que você faria para alguém que você ama que estivesse esgotado? Tente fazer isso por você hoje. 💛"], opcoes: [{l:"Vou tentar.", p:"reflexao_final"}] },
+    nova_perspectiva: { texto: ["É normal não ter pensado assim antes. Quando estamos sofrendo, nossa mente foca no que está errado e esquece o quanto já superamos.", "Cada dia que você está aqui é uma escolha. E você continua escolhendo estar aqui. Isso tem um valor enorme. 💛"], opcoes: [{l:"Continuar conversando.", p:"reflexao_final"}] },
+    dificil_acreditar: { texto: ["É difícil mesmo. Quando estamos sofrendo, as palavras bonitas parecem vazias.", "Então não vou te pedir para acreditar agora. Só peço que você fique. Que você respire mais um dia.", "Um dia de cada vez é suficiente. 💛"], opcoes: [{l:"Ok. Só mais um dia.", p:"reflexao_final"}] },
+    pequeno_importa: { texto: ["Parece pouco — mas não é. Sério.", "Quando o mundo pesa, levantar um dedo já é resistência. Você resistiu. Você está aqui.", "Isso importa mais do que você imagina. Você importa. 💛"], opcoes: [{l:"Obrigado(a).", p:"reflexao_final"}] },
+    quer_melhorar: { texto: ["Que lindo isso. Querer melhorar já é um ato de amor por si mesmo(a).", "Me conta: o que faz a sua vida ser sua? Algo que só você tem — uma habilidade, um jeito de ser, uma história?"], opcoes: [{l:"Tenho algumas coisas, sim.", p:"tem_coisas"},{l:"Não sei o que tenho de especial.", p:"sem_especial"}] },
+    tem_coisas: { texto: ["Essas coisas que você tem — elas existem porque você existe.", "O mundo seria diferente sem você. Menos rico. Menos completo.", "Você já parou para pensar no impacto que sua existência tem nas pessoas ao redor? 💛"], opcoes: [{l:"Raramente penso nisso.", p:"impacto"},{l:"Sinto que não faço diferença.", p:"faz_diferenca"}] },
+    sem_especial: { texto: ["O fato de você existir já é especial. Não pelo que você faz, não pelo que você produz — mas pelo que você é.", "Você já fez alguém sorrir? Já ouviu alguém com atenção? Essas coisas existem em você. 💛"], opcoes: [{l:"Talvez sim, às vezes.", p:"impacto"}] },
+    impacto: { texto: ["É difícil enxergar quando estamos sofrendo — mas você já tocou a vida de pessoas. Às vezes de formas que você nem sabe.", "Um sorriso, uma palavra no momento certo, simplesmente estar presente. Esses gestos importam.", "E você tem a capacidade de continuar fazendo isso. 💛"], opcoes: [{l:"Continuar.", p:"reflexao_final"}] },
+    faz_diferenca: { texto: ["Eu ouço você. Mas a ausência de alguém deixa um buraco que ninguém mais pode preencher da mesma forma.", "Você é insubstituível — mesmo que agora seja muito difícil acreditar nisso.", "A sua presença no mundo faz diferença. 💛"], opcoes: [{l:"Quero continuar conversando.", p:"reflexao_final"}] },
+    continuar_conversa: { texto: ["Estou aqui. 💛 O que mais você gostaria de compartilhar?"], opcoes: [{l:"Quero falar sobre meus sentimentos.", p:"como_esta"},{l:"Quero ouvir palavras de encorajamento.", p:"reflexao_final"}] },
+    reflexao_final: { texto: ["Antes de terminar, quero te dizer algo com o coração:", "Você chegou até aqui. Atravessou dias difíceis que pareciam impossíveis. Sobreviveu a momentos que ninguém mais viu.", "Isso não é pouca coisa. Isso é força.", "A sua vida tem valor que vai além do que você consegue medir. As pessoas que te conhecem — e as que ainda vão te conhecer — precisam de você aqui.", "Se o peso ficar pesado demais, lembre: CVV 188, sempre disponível. Você merece apoio. 💛"], opcoes: [{l:"Obrigado(a), Luz. Me ajudou.", p:"despedida"},{l:"Quero conversar mais um pouco.", p:"continuar_conversa"}] },
+    despedida: { texto: ["Eu fico muito feliz que você esteve aqui. 💛", "Cuide-se com o mesmo carinho que você daria a alguém que ama. Você merece isso.", "Se precisar voltar, estarei aqui. A sua vida é preciosa — e o mundo é melhor com você nele. 🌻"], fim: true },
+  };
+
+  let chatOpen = false;
+  let iniciado = false;
+  let noAtual = null;
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    const win = document.getElementById('chatbot-window');
+    const btn = document.getElementById('chatbot-btn');
+    win.classList.toggle('hidden', !chatOpen);
+    btn.textContent = chatOpen ? '✕' : '💛';
+    if (chatOpen && !iniciado) { iniciado = true; setTimeout(() => exibirNo('inicio'), 300); }
+  }
+
+  function exibirNo(id) {
+    noAtual = null;
+    const no = nos[id];
+    const textos = Array.isArray(no.texto) ? no.texto : [no.texto];
+    mostrarDigitando();
+    let delay = 700;
+    textos.forEach((txt, i) => {
+      setTimeout(() => {
+        esconderDigitando();
+        addMsg('bot', txt);
+        if (i < textos.length - 1) setTimeout(mostrarDigitando, 200);
+        else {
+          noAtual = no;
+          renderOpcoes(no);
+        }
+      }, delay + i * 800);
+    });
+  }
+
+  function addMsg(de, texto) {
+    const container = document.getElementById('chatMessages');
+    const msg = document.createElement('div');
+    msg.className = 'msg ' + de;
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    texto.split('\n').filter(l => l.trim()).forEach((linha, i) => {
+      const p = document.createElement('p');
+      p.textContent = linha;
+      if (i > 0) p.style.marginTop = '.5rem';
+      bubble.appendChild(p);
+    });
+    msg.appendChild(bubble);
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  let typingEl = null;
+  function mostrarDigitando() {
+    if (typingEl) return;
+    const container = document.getElementById('chatMessages');
+    typingEl = document.createElement('div');
+    typingEl.className = 'msg bot';
+    typingEl.innerHTML = '<div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+    container.appendChild(typingEl);
+    container.scrollTop = container.scrollHeight;
+  }
+  function esconderDigitando() {
+    if (typingEl) { typingEl.remove(); typingEl = null; }
+  }
+
+  function renderOpcoes(no) {
+    const container = document.getElementById('chatMessages');
+    const opcaoDiv = document.createElement('div');
+    opcaoDiv.className = 'chat-options';
+    opcaoDiv.id = 'opcoes-ativas';
+    if (no.opcoes) {
+      no.opcoes.forEach(op => {
+        const btn = document.createElement('button');
+        btn.className = 'chat-option';
+        btn.textContent = op.l;
+        btn.onclick = () => escolher(op, opcaoDiv);
+        opcaoDiv.appendChild(btn);
+      });
+    }
+    if (no.fim) {
+      const restart = document.createElement('button');
+      restart.className = 'chat-restart';
+      restart.textContent = 'Recomeçar conversa';
+      restart.onclick = reiniciar;
+      opcaoDiv.appendChild(restart);
+    }
+    container.appendChild(opcaoDiv);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function escolher(op, opcaoDiv) {
+    opcaoDiv.remove();
+    addMsg('user', op.l);
+    setTimeout(() => exibirNo(op.p), 400);
+  }
+
+  function reiniciar() {
+    document.getElementById('chatMessages').innerHTML = '';
+    noAtual = null; iniciado = true;
+    setTimeout(() => exibirNo('inicio'), 200);
+  }
+</script>
+</body>
+</html>
